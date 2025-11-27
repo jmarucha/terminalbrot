@@ -46,14 +46,6 @@ Via escape time colouring algorithm. Nothing fancy. Randomizing characters based
 ![Mandelbrot set.](/screenshots/4.png)
 ![Mandelbrot set.](/screenshots/5.png)
 
-## License
-
-MIT License - See LICENSE file for details.
-
 ## Is functional programming fun?
 
 Eeeeeeeeeeeeeehhhhhhhhmmmmmmmmm...
-
-## Author
-
-Jan Marucha

@@ -59,7 +59,7 @@ mainLoop render_hue camera = do
         Nothing -> (24, 80) -- VT-100
   let viewport' = viewport w h 2 camera
       grid = complexGrid w h viewport' `using` rdeepseq
-      iter_count = floor (zoom camera * (-50)) :: Integer
+      iter_count = floor (zoom camera * (-50)) :: Int
       charDraw = charMap render_hue iter_count . mandelbrotGraphData iter_count
       charsToDraw = concat $ parMap rpar (concatMap charDraw) grid
   setCursorPosition 0 0
@@ -99,12 +99,12 @@ mainLoop render_hue camera = do
     "\ESC" -> return ()
     _ -> mainLoop' camera
 
-charMap :: Float -> Integer -> Integer -> [Char]
+charMap :: (Integral a, Integral a) => Float -> a -> a -> [Char]
 charMap _ _ 0 = " "
 charMap hue i escape_time =
   let saturation = 1
-      lightness = fromInteger (i - escape_time) / fromInteger i
-      char = chr $ ord 'A' + mod (fromInteger escape_time) (ord 'Z' - ord 'A')
+      lightness = fromIntegral (i - escape_time) / fromIntegral i
+      char = chr $ ord 'A' + mod (fromIntegral escape_time) (ord 'Z' - ord 'A')
    in setSGRCode [SetRGBColor Foreground (hslColor hue saturation lightness)] ++ [char]
 
 -- why is it so complicated?
